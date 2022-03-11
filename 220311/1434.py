@@ -17,4 +17,3 @@ if box != []:
         ans += b
 
 print(ans)
-
