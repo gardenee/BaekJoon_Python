@@ -1,18 +1,18 @@
 from sys import stdin
 
-class Que:
+class Queue:
     def __init__(self):
-        self.que = []
+        self.queue = []
         self.size = 0
 
     def push(self, X):
-        self.que.append(X)
+        self.queue.append(X)
         self.size += 1
 
     def pop(self):
-        if self.que:
+        if self.queue:
             self.size -= 1
-            return(self.que.pop(0))
+            return(self.queue.pop(0))
         else:
             return -1
 
@@ -23,30 +23,30 @@ class Que:
             return 0
 
     def front(self):
-        if self.que:
-            return self.que[0]
+        if self.queue:
+            return self.queue[0]
         else:
             return -1
 
     def back(self):
-        if self.que:
-            return self.que[-1]
+        if self.queue:
+            return self.queue[-1]
         else:
             return -1
 
 
-myQue = Que()
+myQueue = Queue()
 for _ in range(int(input())):
     command = list(stdin.readline().rstrip().split())
     if command[0] == "push":
-        myQue.push(int(command[1]))
+        myQueue.push(int(command[1]))
     elif command[0] == "pop":
-        print(myQue.pop())
+        print(myQueue.pop())
     elif command[0] == "size":
-        print(myQue.size)
+        print(myQueue.size)
     elif command[0] == "empty":
-        print(myQue.empty())
+        print(myQueue.empty())
     elif command[0] == "front":
-        print(myQue.front())
+        print(myQueue.front())
     elif command[0] == "back":
-        print(myQue.back())
+        print(myQueue.back())
