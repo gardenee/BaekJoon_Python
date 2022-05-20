@@ -4,22 +4,17 @@ ipt = list(input())
 N = int(input())
 
 ans = ""
-cmd = list(input().split())
-sum = [0] * len(ipt)
+arr = [[0] * 26 for _ in range(len(ipt))]
 
 for i in range(len(ipt)):
+    arr[i][ord(ipt[i])-97] = 1
     if i != 0:
-        sum[i] += sum[i-1]
-    if ipt[i] == cmd[0]:
-        sum[i] += 1
+        for j in range(26):
+            arr[i][j] += arr[i-1][j]
 
-for i in range(N):
-    if int(cmd[1]) == 0:
-        ans += str(sum[int(cmd[2])]) + '\n'
+for _ in range(N):
+    cmd = stdin.readline().split()
+    if int(cmd[1]) != 0:
+        print(arr[int(cmd[2])][ord(cmd[0])-97] - arr[int(cmd[1])-1][ord(cmd[0])-97])
     else:
-        ans += str(sum[int(cmd[2])] - sum[int(cmd[1])-1]) + '\n'
-
-    if i != N-1:
-        cmd = list(stdin.readline().replace('\n', ' ').split())
-
-print(ans)
+        print(arr[int(cmd[2])][ord(cmd[0])-97])
