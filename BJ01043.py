@@ -7,7 +7,7 @@ group = dict()
 parents = [0] * (N+1)
 for i in range(N+1):
     if i in truth:
-        parents[i] = -1
+        parents[i] = 0
     else:
         parents[i] = i
     group[i] = list()
@@ -15,8 +15,8 @@ for i in range(N+1):
 
 def findparents(a):
     global parents
-    if parents[a] == -1:
-        return -1
+    if parents[a] == 0:
+        return 0
     if parents[a] == a:
         return a
     parents[a] = parents[parents[a]]
@@ -25,10 +25,10 @@ def findparents(a):
 
 def union(a, b):
     global parents
-    if parents[a] == -1:
-        parents[findparents(b)] = -1
-    elif parents[b] == -1:
-        parents[findparents(a)] = -1
+    if parents[a] == 0:
+        parents[findparents(b)] = 0
+    elif parents[b] == 0:
+        parents[findparents(a)] = 0
     else:
         parents[findparents(a)] = findparents(b)
 
@@ -37,16 +37,16 @@ for j in range(M):
     curr = list(map(int, input().split()))
     n = curr[0]
     for i in range(1, n+1):
-        group[curr[i]].append(chr(65+j))
+        group[curr[i]].append(j)
         if i == n:
             break
-        union(curr[i], curr[i+1])
+        union(curr[i+1], curr[i])
 
-answer = set()
+result = [1] * M
 for i in range(1, N+1):
     curr = findparents(parents[i])
-    if curr != -1:
+    if curr == 0:
         for g in group[i]:
-            answer.add(g)
+            result[g] = 0
 
-print(len(answer))
+print(sum(result))
