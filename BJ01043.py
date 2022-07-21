@@ -1,16 +1,16 @@
 N, M = map(int, input().split())
 truth = list(map(int, input().split()))
 T = truth[0]
-truth[0] = -1
+truth[0] = 0
 group = dict()
 
 parents = [0] * (N+1)
 for i in range(N+1):
-    if i in truth:
-        parents[i] = 0
-    else:
-        parents[i] = i
+    parents[i] = i
     group[i] = list()
+
+for t in truth:
+    parents[t] = 0
 
 
 def findparents(a):
@@ -19,8 +19,7 @@ def findparents(a):
         return 0
     if parents[a] == a:
         return a
-    parents[a] = parents[parents[a]]
-    return findparents(parents[a])
+    parents[a] = findparents(parents[a])
 
 
 def union(a, b):
