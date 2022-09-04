@@ -1,12 +1,11 @@
 import bisect
-from collections import deque
 
 N = int(input())
 ipt = list(map(int, input().split()))
 
 dp = [1] * (N+1)
-asc = deque([ipt[0]])
-desc = deque([ipt[-1]])
+asc = [ipt[0]]
+desc = [ipt[-1]]
 answer = 1
 
 for i in range(N):
