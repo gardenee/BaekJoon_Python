@@ -1,21 +1,19 @@
 N = int(input())
-visited = [False] * N
 route = []
 
 search = [N]
-while N != 1 and True:
+while N != 1:
     curr = [0] * N
     temp = set()
     for c in search:
-        if c % 3 == 0 and not visited[c//3]:
+        if c % 3 == 0:
             temp.add(c//3)
             curr[c//3] = c
-        if c % 2 == 0 and not visited[c//2]:
+        if c % 2 == 0:
             temp.add(c//2)
             curr[c//2] = c
-        if not visited[c-1]:
-            temp.add(c-1)
-            curr[c-1] = c
+        temp.add(c-1)
+        curr[c-1] = c
 
     route.append(curr)
     search = list(temp)
