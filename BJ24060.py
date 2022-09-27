@@ -1,47 +1,45 @@
-import math
+lst = []
 
 
-def merge(arr, p, q, r):
-    print("merge", arr[p:q+1], arr[q+1:])
+def merge_sort(arr):
+    global cnt
+    global answer
+
+    if len(arr) == 1:
+        return arr
+
+    mid = (len(arr)+1)//2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+
     tmp = []
-    i, j, t = p, q, 0
-    while i <= q and j <= r:
-        if arr[i] <= arr[j]:
-            tmp[t] = arr[i]
-            t += 1
+    i, j = 0, 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            tmp.append(left[i])
             i += 1
         else:
-            tmp[t] = arr[j]
-            t += 1
+            tmp.append(right[j])
             j += 1
-    while i <= q:
-        tmp[t] = arr[i]
-        t += 1
+        lst.append(tmp[-1])
+
+    while i < len(left):
+        tmp.append(left[i])
+        lst.append(left[i])
         i += 1
-    while j <= r:
-        tmp[t] = arr[j]
-        t += 1
+    while j < len(right):
+        tmp.append(right[j])
+        lst.append(right[j])
         j += 1
-    i, t = p, 0
-    while i <= r:
-        arr[i] = tmp[t]
-        i += 1
-        t += 1
 
-    return arr
-
-
-def merge_sort(arr, p, r):
-    if p < r:
-        q = math.ceil((p + r)/2)
-        arr = merge_sort(arr, p, q)
-        print("front", arr[p:q+1])
-        arr = merge_sort(arr, q+1, r)
-        print("back", arr[q+1:])
-        arr = merge(arr, p, q, r)
-    return arr
+    return tmp
 
 
 N, K = map(int, input().split())
 ipt = list(map(int, input().split()))
-print(merge_sort(ipt, 0, N-1))
+merge_sort(ipt)
+
+if len(lst) >= K:
+    print(lst[K-1])
+else:
+    print(-1)
