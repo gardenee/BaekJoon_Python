@@ -22,4 +22,3 @@ for i in range(N):
         mid = heapq.heappop(right)
         a += 1
     print(mid)
-    print(left, mid, right)
