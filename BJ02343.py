@@ -1,9 +1,9 @@
 N, M = map(int, input().split())
 lectures = list(map(int, input().split()))
 
-answer = sum(lectures)
+answer = 100000000
 
-start, end = max(lectures), answer+1
+start, end = max(lectures), sum(lectures)+1
 while start < end:
     mid = (start + end)//2
 
